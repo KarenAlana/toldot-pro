@@ -6,7 +6,6 @@ const {
 } = require("../middlewares/authenticateToken");
 const {
   MaterialAdulto,
-  MaterialKids,
   MaterialNewsletter,
   MaterialExclusivo,
 } = require("../models/Material");
@@ -57,19 +56,5 @@ router.get("/exclusivo",
     }
   }
 )
-router.get("/materialKids/:id", verifyToken, async (req, res) => {
-  const itemId = req.params.id;
-  MaterialAdulto.findById(itemId)
-    .then((item) => {
-      if (!item) {
-        return res.status(404).json({ message: "Item not found" });
-      }
-      res.json(item);
-    })
-    .catch((error) => {
-      console.error("Error fetching item:", error);
-      res.status(500).json({ message: "Internal server error" });
-    });
-});
 
 module.exports = router;
