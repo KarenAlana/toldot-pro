@@ -27,7 +27,7 @@ clientUserDB.on("connected", () => console.log("Conectado ao banco Client User")
 materialDB.on("connected", () => console.log("Conectado ao banco Material"));
 
 // Iniciar servidor
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT} - http://localhost:${PORT}`));
 
 
 

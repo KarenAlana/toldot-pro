@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 // Função para criar uma conexão com tratamento de erros
 const createConnection = (uri, name) => {
@@ -20,13 +21,11 @@ const createConnection = (uri, name) => {
 
 
 const clientUserDB = createConnection(
-  "mongodb+srv://admin:admin@clientuser.mongodb.net/",
-  "Client User"
+  process.env.MONGO_URI_clientUserDB
 );
 
 const materialDB = createConnection(
-  "mongodb+srv://admin:admin@material.mongodb.net/",
-  "Material"
+  process.env.MONGO_URI_materialDB
 );
 
 // Exportar as conexões para serem usadas no restante da aplicação

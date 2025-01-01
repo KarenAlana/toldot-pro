@@ -12,14 +12,17 @@ const {
 
 const router = express.Router();
 
-router.get("/materialAdulto", authenticateTokenOn, authenticateTokenGeral, async (req, res) => {
+router.get("/materialAdulto",
+  //  authenticateTokenOn, authenticateTokenGeral,
+   async (req, res) => {
   try {
     const materials = await MaterialAdulto.find();
     res.status(200).json(materials);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao buscar materiais" });
+    res.status(500).json({ error:` ${error}`});
   }
 });
+
 router.get("/materialAdulto/:id", authenticateTokenOn, authenticateTokenGeral, async (req, res) => {
   const itemId = req.params.id;
   MaterialAdulto.findById(itemId)

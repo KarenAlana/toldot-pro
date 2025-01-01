@@ -1,11 +1,11 @@
-import jwt from "jsonwebtoken";
-import cookie from "cookie";
+const jwt = require("jsonwebtoken");
+const cookie = require("cookie");
 
 // Variável do segredo
 const Jt = "3f1f19abced6810beeb5e803c4b80fca";
 
 // Middleware para autenticação geral
-export const authenticateTokenGeral = (req, res, next) => {
+const authenticateTokenGeral = (req, res, next) => {
   const cookies = cookie.parse(req.headers.cookie || "");
   const tokenCookie = cookies.token || req.headers.authorization?.split(" ")[1];
 
@@ -23,7 +23,7 @@ export const authenticateTokenGeral = (req, res, next) => {
 };
 
 // Middleware para autenticação exclusiva
-export const authenticateTokenExclusivo = (req, res, next) => {
+const authenticateTokenExclusivo = (req, res, next) => {
   const cookies = cookie.parse(req.headers.cookie || "");
   const tokenCookie = cookies.token || req.headers.authorization?.split(" ")[1];
 
@@ -41,7 +41,7 @@ export const authenticateTokenExclusivo = (req, res, next) => {
 };
 
 // Middleware para autenticação de status
-export const authenticateTokenOn = (req, res, next) => {
+const authenticateTokenOn = (req, res, next) => {
   const cookies = cookie.parse(req.headers.cookie || "");
   const tokenCookie = cookies.token || req.headers.authorization?.split(" ")[1];
 
@@ -56,4 +56,10 @@ export const authenticateTokenOn = (req, res, next) => {
     req.user = user; // Armazenando o usuário no req
     next();
   });
+};
+
+module.exports = {
+  authenticateTokenGeral,
+  authenticateTokenExclusivo,
+  authenticateTokenOn,
 };
