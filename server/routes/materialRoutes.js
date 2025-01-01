@@ -12,8 +12,10 @@ const {
 
 const router = express.Router();
 
+
+// http://localhost:5000/api/materialAdulto
 router.get("/materialAdulto",
-  //  authenticateTokenOn, authenticateTokenGeral,
+ authenticateTokenOn, authenticateTokenGeral,
    async (req, res) => {
   try {
     const materials = await MaterialAdulto.find();

@@ -1,7 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { clientUserDB } = require("../config/dbConnection");
-const User = require("../models/User"); 
+const { generateTokenGeral, generateTokenOn,generateTokenExclusivo } = require("../middlewares/generateToken");
+const UserAdultos = require("../models/User"); 
 
 const router = express.Router();
 
@@ -18,11 +19,12 @@ const router = express.Router();
 //   }
 // });
 
+//http://localhost:5000/auth/login
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   try {
     // Procurando o usuário pelo nome de usuário
-    const user = await UserAdulto.findOne({ username });
+    const user = await UserAdultos.findOne({ email });
 
     // Verificando se o usuário existe e se a senha está correta
     if (!user || !bcrypt.compareSync(password, user.password)) {
